@@ -7,14 +7,14 @@ require "allowed_params/version"
 Gem::Specification.new do |s|
   s.name        = "allowed_params"
   s.version     = AllowedParams::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of AllowedParams."
-  s.description = "TODO: Description of AllowedParams."
+  s.authors     = ["Tema Bolshakov"]
+  s.email       = ["abolshakov@spbtv.com"]
+  # s.homepage    = "TODO"
+  s.summary     = "Filter params on rails controllers"
+  s.description = "Allow to filter and validate params on rails controllers"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
 
   s.add_dependency "rails", "~> 4.1.1"

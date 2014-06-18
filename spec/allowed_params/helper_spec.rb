@@ -1,5 +1,5 @@
 require 'rails_helper'
-AllowedParams.config.ignored_params = [:format]
+AllowedParams.config.allowed_params = [:format]
 describe AllowedParams::Helper, type: :controller do
   controller ApplicationController do
     include AllowedParams::Helper

@@ -2,7 +2,7 @@ require_relative 'model'
 
 module AllowedParams
   include ActiveSupport::Configurable
-  config.ignored_params = []
+  config.allowed_params = []
 
   class ValidatorBuilder
     def initialize(controller)
@@ -34,7 +34,7 @@ module AllowedParams
         end
 
         def initialize(params = {})
-          @params = params.except(*Array(AllowedParams.config.ignored_params)).except(:controller, :action)
+          @params = params.except(*Array(AllowedParams.config.allowed_params)).except(:controller, :action)
           members.each do |name|
             send(:"#{name}=", params[name])
           end
