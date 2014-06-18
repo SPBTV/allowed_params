@@ -10,10 +10,11 @@ This gem provides filtering and validations of params
         params do
             allow :name, presence: true
             allow :age
+            allow :id
         end
         def update
             # do the job
-        end 
+        end        
     end
     
 ```
