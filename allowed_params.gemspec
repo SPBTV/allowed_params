@@ -7,8 +7,8 @@ require "allowed_params/version"
 Gem::Specification.new do |s|
   s.name        = "allowed_params"
   s.version     = AllowedParams::VERSION
-  s.authors     = ["Tema Bolshakov"]
-  s.email       = ["abolshakov@spbtv.com"]
+  s.authors     = ["Tema Bolshakov", "Dmitry Rybakov"]
+  s.email       = ["abolshakov@spbtv.com", "drybakov@spbtv.com"]
   s.homepage    = "https://github.com/SPBTV/allowed_params"
   s.summary     = "Filter params on rails controllers"
   s.description = "Allow to filter and validate params on rails controllers"

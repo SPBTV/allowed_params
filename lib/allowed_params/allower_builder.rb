@@ -4,17 +4,17 @@ module AllowedParams
   include ActiveSupport::Configurable
   config.allowed_params = []
 
-  class ValidatorBuilder
+  class AllowerBuilder
     def initialize(controller)
       @controller = controller
       @params = {}
     end
 
-    def validate(name, options = {})
+    def allow(name, options = {})
       @params[name] = options
     end
 
-    def validator
+    def allower
       params_options = @params
       controller_name = @controller.name.underscore
 
@@ -38,6 +38,10 @@ module AllowedParams
           members.each do |name|
             send(:"#{name}=", params[name])
           end
+        end
+
+        def not_allowed
+          @params.keys.map(&:to_s) - members.map(&:to_s)
         end
       end
     end

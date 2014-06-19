@@ -1,3 +1,4 @@
+require_relative 'allower_builder'
 require_relative 'validator_builder'
 
 module AllowedParams
@@ -8,14 +9,33 @@ module AllowedParams
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def params(&block)
+      def allowed_params(&block)
+        builder = ::AllowedParams::AllowerBuilder.new(self)
+        builder.instance_eval(&block) if block_given?
+        @request_params_allower = builder.allower
+      end
+
+      def validated_params(&block)
         builder = ::AllowedParams::ValidatorBuilder.new(self)
         builder.instance_eval(&block) if block_given?
         @request_params_validator = builder.validator
       end
 
       def method_added(method)
-        if instance_variable_get(:@request_params_validator).present?
+        if instance_variable_get(:@request_params_allower).present?
+          request_params_allower = @request_params_allower
+          @request_params_allower = nil
+
+          before_filter only: [method] do
+            request_params = request_params_allower.new(params)
+            if request_params.invalid?
+              raise ValidationError, request_params.errors.full_messages.first
+            end
+            if request_params.not_allowed.present?
+              raise NotAllowedError, request_params.not_allowed.join(', ')
+            end
+          end
+        elsif instance_variable_get(:@request_params_validator).present?
           request_params_validator = @request_params_validator
           @request_params_validator = nil
 
@@ -24,11 +44,9 @@ module AllowedParams
             if request_params.invalid?
               raise ValidationError, request_params.errors.full_messages.first
             end
-            if request_params.not_allowed.present?
-              raise NotAllowedError, request_params.not_allowed.join(', ')
-            end
           end
         end
+
         super
       end
     end
