@@ -2,7 +2,7 @@
 
 ## Installation
 
-This project uses [http://semver.org/spec/v2.0.0.html](semantic versioning).
+This project uses [semantic versioning](http://semver.org/spec/v2.0.0.html).
 
 Add it to your Gemfile:
 
