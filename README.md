@@ -1,5 +1,30 @@
 # AllowedParams
 
+## Installation
+
+This project uses [http://semver.org/spec/v2.0.0.html](semantic versioning).
+
+Add it to your Gemfile:
+
+```ruby
+gem 'allowed_params'
+```
+
+And then execute:
+
+```sh
+$ bundle
+```
+
+Or install it yourself with:
+
+```sh
+$ gem install allowed_params
+```
+
+
+## Usage
+
 This gem provides filtering and validations of params
  
 ```ruby
@@ -31,4 +56,3 @@ To allow params on all controllers:
 ```
 
 This project rocks and uses MIT-LICENSE.
-
