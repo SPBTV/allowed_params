@@ -10,7 +10,7 @@ module AllowedParams
       @params = {}
     end
 
-    def allow(name, options = {})
+    def validate(name, options = {})
       @params[name] = options
     end
 
@@ -40,9 +40,10 @@ module AllowedParams
           end
         end
 
-        def not_allowed
+        def not_white_listed
           @params.keys.map(&:to_s) - members.map(&:to_s)
         end
+
       end
     end
   end
