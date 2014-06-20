@@ -2,17 +2,17 @@
 
 This gem provides filtering and validations of params
 
-## Allowed params
+## Params validation with whitelist
  
 ```ruby
 
-    class DogsController < ApplicationController
+    class EmployersController < ApplicationController
         include AllowedParams::Helper
         
-        allowed_params do
-            allow :name, presence: true
-            allow :age
-            allow :id
+        params whitelist: true do
+            validate :id, presence: true
+            validate :name, presence: true
+            validate :position, inclusion: { in: %w(manager developer) }
         end
         def update
             # do the job
@@ -21,9 +21,8 @@ This gem provides filtering and validations of params
     
 ```
  
-This will validate `params[:name]` and raise `AllowedParams::ValidationError` in case of invalid value.
-`age` param is allowed and not validated. All other params is not allowed, and `AllowedParams::NotAllowedError`
-will be raised if present.
+This will validate listed params and raise `AllowedParams::ValidationError` in case of invalid value.
+All other params are not allowed, and `AllowedParams::NotAllowedError` will be raised if present.
 
 To allow params on all controllers:
  
@@ -33,13 +32,13 @@ To allow params on all controllers:
 
 ```   
 
-## Validated params   
+## Just validation   
    
 ```ruby    
     class CatsController < ApplicationController
         include AllowedParams::Helper
         
-        validated_params do
+        params do
             validates :name, presence: true
             validates :kind, inclusion: { in: %w(fluffy bald) }
         end
@@ -51,6 +50,7 @@ To allow params on all controllers:
 ```
 
 This will validate `params[:name], params[:kind]` and raise `AllowedParams::ValidationError` in case of invalid value.
+All other params will just go through without any checks.
 
 This project rocks and uses MIT-LICENSE.
 

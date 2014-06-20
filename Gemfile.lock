@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    allowed_params (1.0.0)
+    allowed_params (0.0.2)
       rails (>= 3)
 
 GEM

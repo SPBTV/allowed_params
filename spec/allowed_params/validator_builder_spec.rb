@@ -26,4 +26,10 @@ describe AllowedParams::ValidatorBuilder do
     expect(validator.errors.full_messages).to contain_exactly 'Foo field is required.'
   end
 
+  it 'returns not white listed params' do
+    validator = @builder.validator.new(foo: 2, bar: 2)
+    expect(validator.not_white_listed).to contain_exactly "bar"
+  end
+
+
 end

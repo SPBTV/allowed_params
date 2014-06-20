@@ -39,6 +39,11 @@ module AllowedParams
             send(:"#{name}=", params[name])
           end
         end
+
+        def not_white_listed
+          @params.keys.map(&:to_s) - members.map(&:to_s)
+        end
+
       end
     end
   end

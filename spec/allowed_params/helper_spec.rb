@@ -1,13 +1,15 @@
 require 'rails_helper'
 AllowedParams.config.allowed_params = [:format]
+
 describe AllowedParams::Helper, type: :controller do
-  context :allowed_params do
+
+  context :params_with_whitelist do
     controller ApplicationController do
       include AllowedParams::Helper
 
-      allowed_params do
-        allow :name, presence: true
-        allow :age
+      params whitelist: true do
+        validate :name, presence: true
+        validate :age
       end
 
       def index
@@ -15,21 +17,24 @@ describe AllowedParams::Helper, type: :controller do
       end
     end
 
-    it 'raise error if param is invalid' do
+    it 'raise error if required params are not present' do
       expect {
         get :index
       }.to raise_error(AllowedParams::ValidationError)
     end
 
-    it 'do not raise error if param is valid' do
+    it 'do not raise error if params are valid' do
       expect {
         get :index, name: 'John'
       }.not_to raise_error
+      expect {
+        get :index, name: 'John', age: 15
+      }.not_to raise_error
     end
 
-    it 'raise error if param is not allowed' do
+    it 'raise error if not white listed params passed' do
       expect {
-        get :index, name: 'John', surname: 'Doe'
+        get :index, name: 'John', age: 15, surname: 'Doe'
       }.to raise_error(AllowedParams::NotAllowedError)
     end
 
@@ -46,11 +51,11 @@ describe AllowedParams::Helper, type: :controller do
     end
   end
 
-  context :validated_params do
+  context :params_without_whitelist do
     controller ApplicationController do
       include AllowedParams::Helper
 
-      validated_params do
+      params do
         validate :name, presence: true
         validate :position, inclusion: { in: %w(manager developer) }
       end
@@ -69,7 +74,7 @@ describe AllowedParams::Helper, type: :controller do
       }.to raise_error(AllowedParams::ValidationError)
     end
 
-    it 'do not raise error if param is valid' do
+    it 'do not raise error if params are valid' do
       expect {
         get :index, name: 'John', position: 'developer'
       }.not_to raise_error
