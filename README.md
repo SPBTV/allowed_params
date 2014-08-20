@@ -35,9 +35,9 @@ This gem provides filtering and validations of params
         include AllowedParams::Helper
         
         params whitelist: true do
-            validate :id, presence: true
-            validate :name, presence: true
-            validate :position, inclusion: { in: %w(manager developer) }
+            validates :id, presence: true
+            validates :name, presence: true
+            validates :position, inclusion: { in: %w(manager developer) }
         end
         def update
             # do the job
@@ -48,6 +48,7 @@ This gem provides filtering and validations of params
  
 This will validate listed params and raise `AllowedParams::ValidationError` in case of invalid value.
 All other params are not allowed, and `AllowedParams::NotAllowedError` will be raised if present.
+You can use any of [ActiveModel::Validations](http://api.rubyonrails.org/classes/ActiveModel/Validations.html)' validators.
 
 To allow params on all controllers:
  
