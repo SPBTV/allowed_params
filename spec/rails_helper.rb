@@ -1,8 +1,23 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] = "test"
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require "rails"
+require 'active_model/railtie'
+require 'action_controller/railtie'
+require 'action_view/railtie'
+require 'rails/test_unit/railtie'
+require 'allowed_params'
 require 'rspec/rails'
 require 'spec_helper'
+
+class TestApp < Rails::Application
+  config.eager_load = false
+  config.secret_key_base = 'abc123'
+
+  # Set up a logger to avoid creating a log directory on every run.
+  config.logger = Logger.new(nil)
+end
+
+TestApp.initialize!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

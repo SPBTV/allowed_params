@@ -1,9 +1,6 @@
 require_relative 'model'
 
 module AllowedParams
-  include ActiveSupport::Configurable
-  config.allowed_params = []
-
   class ValidatorBuilder
     def initialize(controller)
       @controller = controller

@@ -4,7 +4,7 @@ AllowedParams.config.allowed_params = [:format]
 describe AllowedParams::Helper, type: :controller do
 
   context :params_with_whitelist do
-    controller ApplicationController do
+    controller ActionController::Base do
       include AllowedParams::Helper
 
       params whitelist: true do
@@ -52,7 +52,7 @@ describe AllowedParams::Helper, type: :controller do
   end
 
   context :params_without_whitelist do
-    controller ApplicationController do
+    controller ActionController::Base do
       include AllowedParams::Helper
 
       params do
