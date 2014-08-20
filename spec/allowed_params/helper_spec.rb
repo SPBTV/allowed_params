@@ -8,8 +8,8 @@ describe AllowedParams::Helper, type: :controller do
       include AllowedParams::Helper
 
       params whitelist: true do
-        validate :name, presence: true
-        validate :age
+        validates :name, presence: true
+        validates :age
       end
 
       def index
@@ -56,8 +56,8 @@ describe AllowedParams::Helper, type: :controller do
       include AllowedParams::Helper
 
       params do
-        validate :name, presence: true
-        validate :position, inclusion: { in: %w(manager developer) }
+        validates :name, presence: true
+        validates :position, inclusion: { in: %w(manager developer) }
       end
 
       def index

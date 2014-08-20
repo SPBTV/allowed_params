@@ -4,7 +4,7 @@ describe AllowedParams::ValidatorBuilder do
   let(:controller) { double(name: 'TheController') }
   before do
     @builder = AllowedParams::ValidatorBuilder.new controller
-    @builder.validate :foo, presence: true
+    @builder.validates :foo, presence: true
   end
 
   it 'should be valid' do

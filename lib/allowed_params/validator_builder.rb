@@ -7,7 +7,7 @@ module AllowedParams
       @params = {}
     end
 
-    def validate(name, options = {})
+    def validates(name, options = {})
       @params[name] = options
     end
 
