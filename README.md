@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/SPBTV/allowed_params.svg?branch=master)](https://travis-ci.org/SPBTV/allowed_params)
+
 # AllowedParams
 
 ## Installation
