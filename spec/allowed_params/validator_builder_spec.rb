@@ -9,7 +9,7 @@ describe AllowedParams::ValidatorBuilder do
 
   it 'should be valid' do
     validator = @builder.validator.new(foo: 1)
-
+    puts ">> #{@builder.validator.lookup_ancestors.inspect}"
     expect(validator).to be_valid
   end
 

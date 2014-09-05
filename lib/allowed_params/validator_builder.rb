@@ -13,7 +13,7 @@ module AllowedParams
 
     def validator
       params_options = @params
-      controller_name = @controller.name.underscore
+      controller_name = @controller.name.demodulize.underscore
 
       Struct.new(*params_options.keys) do
         include Model
