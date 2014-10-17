@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/SPBTV/allowed_params"
   s.summary     = "Filter params on rails controllers"
   s.description = "Allow to filter and validate params on rails controllers"
-  s.license     = "MIT"
+  s.license     = "Apache License, Version 2.0"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
